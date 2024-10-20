@@ -1,0 +1,5 @@
+numpy==1.23.5
+matplotlib==3.5.3
+rich==13.4.0
+colorama==0.4.6
+pandas==2.1.0

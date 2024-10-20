@@ -1,0 +1,72 @@
+Sur ce data set test, l'algorithme optimisé doit fournir le meilleure investissement en moins de 5 secondes. aucune restriction de temps pour l'algorithme de brute force.
+
+
+
+
+J'espère que vous êtes prêt pour votre premier vrai projet ! 
+Nous avons besoin d'aide pour optimiser les solutions de nos clients afin de rendre nos programmes d'investissement à court terme plus compétitifs. Nous avons besoin que vous conceviez un algorithme qui maximisera le profit réalisé par nos clients après deux ans d'investissement. Votre algorithme doit suggérer une liste des actions les plus rentables que nous devrions acheter pour maximiser le profit d'un client au bout de deux ans. 
+ 
+Nous avons les contraintes suivantes : 
+	•	Chaque action ne peut être achetée qu'une seule fois. 
+	•	Nous ne pouvons pas acheter une fraction d'action. 
+	•	Nous pouvons dépenser au maximum 500 euros par client.
+Actions – Chaque "Action-#" représente une action dans une entreprise différente. Si vous imaginez la valeur d'une entreprise comme étant une tarte entière, chaque action est comme une part de cette tarte.
+ 
+Coût par action (en euros) – Le coût d'une action de l'entreprise en euros. 
+ 
+Bénéfice (après 2 ans) – Il s'agit du bénéfice réalisé par le titulaire de l'action après 2 ans d'investissement dans l'entreprise. Le bénéfice est un pourcentage du coût de l'action.  
+ 
+Le but de ce projet est de s'assurer que les étudiants sont capables de déconstruire logiquement un problème, de développer un algorithme basé sur leur analyse, puis d'optimiser leur algorithme.  
+ 
+Livrable : Solution de force brute 
+La solution de la force brute peut être validée si : 
+❒ Le code s'exécute dans un temps limité (il finit de s'exécuter). 
+❒ Le code présente l'investissement le plus rentable, tout en respectant les contraintes.
+ 
+Livrable : Solution optimisée, présentation de diapositives et rapport d'essai 
+La solution optimisée peut être validée si : 
+❒ Le code fonctionne beaucoup plus rapidement que la solution de force brute. 
+❒ Le code lit un fichier contenant des informations sur les actions, et fournit la meilleure stratégie d'investissement.
+ 
+Livrable : Présentation de diapositives 
+❒ La complexité des deux solutions a été analysée (complexité temporelle, utilisation de la mémoire) en utilisant la notation Big-O. 
+❒ La présentation contient un organigramme/diagramme, ou une description pseudocode de l'algorithme mis en œuvre. 
+❒ L'étudiant peut identifier l'algorithme choisi et expliquer ses limites (edge cases). 
+❒ L'étudiant est capable de comparer de manière critique, et de mettre en évidence les différences entre la sortie de son algorithme et les résultats fournis par Sienna
+ 
+Une soutenance mérite un refus dans les cas suivants : 
+	•	Critères d’évaluation non-validés pour une ou plusieurs compétences ; 
+	•	Plagiat (veillez à poser des questions méthodologiques ou sur la raisonnement de la solution pour s’assurer que le travail a bien été réalisé par l’étudiant) ; 
+	•	Une présentation en dessous de 10 min ou au-dessus de 20 minutes.
+
+
+
+
+Sienna bought:Share-GRUT
+Total investissement: 498.76$‚ 
+Total retour sur investissement : 196.61 $‚
+
+
+
+Sienna bought:
+Share-ECAQ 3166
+Share-IXCI 2632
+Share-FWBE 1830
+Share-ZOFA 2532
+Share-PLLK 1994
+Share-YFVZ 2255
+Share-ANFX 3854
+Share-PATS 2770
+Share-NDKR 3306
+Share-ALIY 2908
+Share-JWGF 4869
+Share-JGTW 3529
+Share-FAPS 3257
+Share-VCAX 2742
+Share-LFXB 1483
+Share-DWSK 2949
+Share-XQII 1342
+Share-ROOM 1506
+
+Total investissement : 489.24 $‚
+retour sur investissement : 193.78 $
