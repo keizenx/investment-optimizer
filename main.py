@@ -39,30 +39,52 @@ def afficher_titre():
 def show_complexity_chart():
     """Générer et afficher un graphique de complexité"""
     plt.style.use('dark_background')
-    fig, ax = plt.subplots(figsize=(12, 6))
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(15, 6))
     
-    # Génération des points de données
+    # Premier graphique : Complexité théorique
     n = np.linspace(1, 20, 100)
     bruteforce = 2**n
     optimized = n * np.log2(n)
     
-    # Tracer avec un style personnalisé
-    ax.plot(n, bruteforce, 'r-', label='Force Brute O(2ⁿ)', linewidth=2)
-    ax.plot(n, optimized, 'g-', label='Optimisé O(n log n)', linewidth=2)
+    ax1.plot(n, bruteforce, 'r-', label='Force Brute O(2ⁿ)', linewidth=2)
+    ax1.plot(n, optimized, 'g-', label='Optimisé O(n log n)', linewidth=2)
     
-    ax.set_yscale('log')
-    ax.grid(True, linestyle='--', alpha=0.7)
-    ax.set_title('Comparaison des Complexités Algorithmiques', color='white', pad=20, fontsize=14)
-    ax.set_xlabel('Nombre d\'actions (n)', color='white')
-    ax.set_ylabel('Temps d\'exécution (échelle log)', color='white')
+    ax1.set_yscale('log')
+    ax1.grid(True, linestyle='--', alpha=0.7)
+    ax1.set_title('Complexité Théorique', color='white', pad=20, fontsize=14)
+    ax1.set_xlabel('Nombre d\'actions (n)', color='white')
+    ax1.set_ylabel('Temps d\'exécution (échelle log)', color='white')
     
-    for spine in ax.spines.values():
+    for spine in ax1.spines.values():
         spine.set_color('white')
-    ax.tick_params(colors='white')
+    ax1.tick_params(colors='white')
     
-    legend = ax.legend(facecolor='black', edgecolor='white')
-    plt.setp(legend.get_texts(), color='white')
+    legend1 = ax1.legend(facecolor='black', edgecolor='white')
+    plt.setp(legend1.get_texts(), color='white')
+
+    # Deuxième graphique : Exemple pratique
+    n_practical = np.array([5, 10, 15, 20])
+    time_bruteforce = [0.1, 1.0, 15.0, 300.0]  # Temps approximatifs
+    time_optimized = [0.05, 0.15, 0.3, 0.5]    # Temps approximatifs
+
+    ax2.bar(n_practical - 0.2, time_bruteforce, 0.4, label='Force Brute',
+            color='red', alpha=0.7)
+    ax2.bar(n_practical + 0.2, time_optimized, 0.4, label='Optimisé',
+            color='green', alpha=0.7)
+
+    ax2.set_title('Exemple de Temps d\'Exécution', color='white', pad=20, fontsize=14)
+    ax2.set_xlabel('Nombre d\'actions', color='white')
+    ax2.set_ylabel('Temps (secondes)', color='white')
+    ax2.grid(True, linestyle='--', alpha=0.3)
     
+    for spine in ax2.spines.values():
+        spine.set_color('white')
+    ax2.tick_params(colors='white')
+    
+    legend2 = ax2.legend(facecolor='black', edgecolor='white')
+    plt.setp(legend2.get_texts(), color='white')
+
+    # Informations supplémentaires
     info_text = (
         "Complexité des Algorithmes:\n"
         "• Force Brute: O(2ⁿ) - Optimal mais lent pour n>20\n"
@@ -73,8 +95,115 @@ def show_complexity_chart():
     
     plt.tight_layout()
     plt.show(block=False)
-    plt.pause(60)
+    plt.pause(120)
     plt.close()
+
+class ResultatView:
+    @staticmethod
+    def afficher_resultat(portfolio, temps_execution=None):
+        """Afficher les résultats de l'optimisation"""
+        # Affichage du tableau des résultats
+        table = Table(title="Résultats de l'Optimisation", box=box.DOUBLE_EDGE)
+        
+        # Configuration des colonnes
+        table.add_column("Action", style="green")
+        table.add_column("Prix", style="yellow", justify="right")
+        table.add_column("Bénéfice", style="blue", justify="right")
+        table.add_column("Profit", style="cyan", justify="right")
+        
+        # Ajout des actions
+        for action in portfolio.actions:
+            table.add_row(
+                action.nom,
+                f"{action.prix:.2f}€",
+                f"{action.benefice:.2f}%",
+                f"{action.profit:.2f}€"
+            )
+        
+        # Ligne de total
+        table.add_section()
+        table.add_row(
+            "TOTAL",
+            f"{portfolio.cout_total:.2f}€",
+            f"{portfolio.rendement():.2f}%",
+            f"{portfolio.profit_total:.2f}€",
+            style="bold magenta"
+        )
+        
+        # Affichage du résumé dans un panneau
+        console.print("\n")
+        summary = Panel(
+            f"[cyan]Nombre d'actions: [white]{len(portfolio.actions)}[/white]\n"
+            f"[yellow]Coût total: [white]{portfolio.cout_total:.2f}€[/white]\n"
+            f"[green]Profit total: [white]{portfolio.profit_total:.2f}€[/white]\n"
+            f"[magenta]Rendement: [white]{portfolio.rendement():.2f}%[/white]",
+            title="Résumé",
+            border_style="blue"
+        )
+        console.print(summary)
+        console.print(table)
+        
+        if temps_execution:
+            console.print(f"\n[yellow]Temps d'exécution: {temps_execution:.4f} secondes[/yellow]")
+        
+        # Affichage des graphiques
+        ResultatView._afficher_graphiques(portfolio, temps_execution)
+    
+    @staticmethod
+    def _afficher_graphiques(portfolio, temps_execution):
+        """Afficher les graphiques de résultats"""
+        plt.style.use('dark_background')
+        fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(15, 6))
+        
+        if portfolio.actions:
+            # Données pour les graphiques
+            noms = [action.nom for action in portfolio.actions]
+            couts = [action.prix for action in portfolio.actions]
+            profits = [action.profit for action in portfolio.actions]
+            
+            # Graphique 1: Répartition des investissements
+            ax1.pie(couts, labels=noms, autopct='%1.1f%%',
+                   colors=plt.cm.viridis(np.linspace(0, 1, len(couts))),
+                   textprops={'color': 'white'})
+            ax1.set_title('Répartition des Investissements', color='white', pad=20)
+            
+            # Graphique 2: Profits par action
+            bars = ax2.bar(noms, profits,
+                          color=plt.cm.viridis(np.linspace(0, 1, len(profits))))
+            ax2.set_title('Profits par Action', color='white', pad=20)
+            ax2.set_xlabel('Actions', color='white')
+            ax2.set_ylabel('Profit (€)', color='white')
+            ax2.tick_params(axis='x', rotation=45, colors='white')
+            ax2.tick_params(axis='y', colors='white')
+            
+            # Ajout des valeurs sur les barres
+            for bar in bars:
+                height = bar.get_height()
+                ax2.text(bar.get_x() + bar.get_width()/2., height,
+                        f'{height:.2f}€',
+                        ha='center', va='bottom', color='white')
+            
+            ax2.grid(True, linestyle='--', alpha=0.3)
+            
+            # Configuration des bordures
+            for spine in ax2.spines.values():
+                spine.set_color('white')
+        
+        # Informations supplémentaires
+        info_text = (
+            f"Performance:\n"
+            f"Coût Total: {portfolio.cout_total:.2f}€\n"
+            f"Profit Total: {portfolio.profit_total:.2f}€\n"
+            f"Rendement: {portfolio.rendement():.2f}%\n"
+            f"Temps: {temps_execution:.3f}s"
+        )
+        plt.figtext(0.02, 0.02, info_text, color='white',
+                   bbox=dict(facecolor='black', alpha=0.8, edgecolor='white'))
+        
+        plt.tight_layout()
+        plt.show(block=False)
+        plt.pause(60)
+        plt.close()
 
 def progress_animation(description, duration=1):
     """Afficher une animation de progression"""
