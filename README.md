@@ -21,7 +21,6 @@ Clone the repository:
 git clone https://github.com/Loytifi/investment-optimizer.git
 
 pip install -r requirements.txt
-
 ```
 Usage
 
@@ -29,11 +28,8 @@ Run the main script:
 
 ```
 python main.py
-
-
-
 ```
-Example
+## Example
 
 Here is a simple example of how the program outputs a portfolio:
 
@@ -44,5 +40,3 @@ Selected Portfolio:
 
 Total Cost: $350
 Total Profit: $105
-
-
