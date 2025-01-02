@@ -3,6 +3,9 @@
 ## Investment Optimization Algorithms
 
 ### Overview
+![Optimizer Image](Optimizer.png)
+![Optimizer2 Image](Optimizer2.png)
+
 
 This project focuses on optimizing investment portfolios using brute force and optimized algorithms. The goal is to maximize profits while considering constraints like cost and return on investment over two years.
 
